@@ -70,5 +70,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    // Timber Library for Log Details
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }
