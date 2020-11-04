@@ -5,8 +5,11 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.databinding.MainFragmentBinding
+
 
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -51,7 +54,19 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun setAdapter() {
-        binding.rvMoviesList.adapter = MoviesAdapter()
+
+        val adapter = MoviesAdapter()
+
+        val manager = GridLayoutManager(requireContext(), 2)
+        manager.spanSizeLookup = object : SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (adapter.isHeader(position)) 2 else 1
+            }
+        }
+
+        binding.rvMoviesList.layoutManager = manager
+        binding.rvMoviesList.adapter = adapter
+
 
     }
 

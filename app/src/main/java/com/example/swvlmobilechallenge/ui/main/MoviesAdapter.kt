@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swvlmobilechallenge.R
+import com.example.swvlmobilechallenge.databinding.HolderHeaderBinding
 import com.example.swvlmobilechallenge.databinding.HolderMovieBinding
 
 //
@@ -15,27 +16,59 @@ import com.example.swvlmobilechallenge.databinding.HolderMovieBinding
 
 
 class MoviesAdapter internal constructor(
-) : ListAdapter<MovieResponseModel.Movie, MoviesAdapter.ViewHolder>(DiffCallBack) {
+) : ListAdapter<MovieResponseModel.Movie, RecyclerView.ViewHolder>(DiffCallBack) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val binding = DataBindingUtil.inflate<HolderMovieBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.holder_movie,
-            parent,
-            false
-        )
+        if (viewType == LAYOUT_TYPE_ITEM) {
+            val binding = DataBindingUtil.inflate<HolderMovieBinding>(
+                LayoutInflater.from(parent.context),
+                R.layout.holder_movie,
+                parent,
+                false
+            )
 
-        return ViewHolder(binding)
+            return MovieHolder(binding)
+        } else {
+            val binding = DataBindingUtil.inflate<HolderHeaderBinding>(
+                LayoutInflater.from(parent.context),
+                R.layout.holder_header,
+                parent,
+                false
+            )
+
+            return HeaderHolder(binding)
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = getItem(position)
+        if (item.isHeader) {
+            (holder as HeaderHolder).bind(getItem(position))
 
-        holder.bind(getItem(position))
+        } else {
+            (holder as MovieHolder).bind(getItem(position))
+        }
 
     }
 
-    inner class ViewHolder internal constructor(private val binding: HolderMovieBinding) :
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position).isHeader) return LAYOUT_TYPE_HEADER else LAYOUT_TYPE_ITEM
+    }
+
+    fun isHeader(position: Int): Boolean {
+        return (getItem(position).isHeader)
+    }
+
+    inner class MovieHolder internal constructor(private val binding: HolderMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(addressTag: MovieResponseModel.Movie) {
+            binding.model = addressTag
+            binding.executePendingBindings()
+        }
+    }
+
+    inner class HeaderHolder internal constructor(private val binding: HolderHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(addressTag: MovieResponseModel.Movie) {
             binding.model = addressTag

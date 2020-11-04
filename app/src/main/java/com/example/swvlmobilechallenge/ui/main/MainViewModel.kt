@@ -8,6 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
+const val LAYOUT_TYPE_HEADER = 0
+const val LAYOUT_TYPE_ITEM = 1
+
 class MainViewModel : BaseViewModel() {
 
     private var moviesList: List<MovieResponseModel.Movie>? = null
@@ -23,22 +27,26 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun filterData(date: String?) {
-
         if (!date?.trim().isNullOrBlank()) {
             coroutineScope.launch(Dispatchers.IO) {
-                val list = moviesList?.filter { it.year.toString().contains(date!!) }
-                    ?.sortedByDescending { it.rating }
-                    ?.let {
-                        it.subList(
-                            0, if (it.size >= 5) {
-                                5
-                            } else {
-                                it.size
-                            }
-                        )
+
+                val list = moviesList?.filter {
+                    it.title.toString().contains(date!!) || it.year.toString().contains(date!!)
+                }
+                    ?.groupBy { it.year }
+
+                val resultedList = mutableListOf<MovieResponseModel.Movie>()
+
+                if (list != null) {
+                    for ((k, v) in list) {
+                        resultedList.add(MovieResponseModel.Movie(isHeader = true, year = k))
+                        resultedList.addAll(v.toList().sortedByDescending { it.rating }
+                            .subList(0, if (v.size >= 5) 5 else v.size))
                     }
+                }
+
                 withContext(Dispatchers.Main) {
-                    moviesLiveList.value = list
+                    moviesLiveList.value = resultedList
                 }
 
             }

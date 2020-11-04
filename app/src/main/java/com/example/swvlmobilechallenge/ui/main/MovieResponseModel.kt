@@ -16,14 +16,15 @@ data class MovieResponseModel(
     @JsonClass(generateAdapter = true)
     data class Movie(
         @Json(name = "cast")
-        var cast: List<String?>?,
+        var cast: List<String?>? = null,
         @Json(name = "genres")
-        var genres: List<String?>?,
+        var genres: List<String?>? = null,
         @Json(name = "rating")
-        var rating: Int?,
+        var rating: Int? = null,
         @Json(name = "title")
-        var title: String?,
+        var title: String? = null,
         @Json(name = "year")
-        var year: Int?
+        var year: Int? = null,
+        var isHeader: Boolean = false
     )
 }
