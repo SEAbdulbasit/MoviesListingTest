@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.example.swvlmobilechallenge.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,5 +22,15 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
         binding.viewModel = viewModel
 
+        // Setting up a back button
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
+
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp()
     }
 }

@@ -27,6 +27,16 @@ class MainViewModel : BaseViewModel() {
         if (!date?.trim().isNullOrBlank()) {
             coroutineScope.launch(Dispatchers.IO) {
                 val list = moviesList?.filter { it.year.toString().contains(date!!) }
+                    ?.sortedByDescending { it.rating }
+                    ?.let {
+                        it.subList(
+                            0, if (it.size >= 5) {
+                                5
+                            } else {
+                                it.size
+                            }
+                        )
+                    }
                 withContext(Dispatchers.Main) {
                     moviesLiveList.value = list
                 }

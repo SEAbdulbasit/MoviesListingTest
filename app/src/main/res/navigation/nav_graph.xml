@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.swvlmobilechallenge.ui.main.MainFragment"
-        android:label="main_fragment"
+        android:label="Movies List"
         tools:layout="@layout/main_fragment" />
 </navigation>

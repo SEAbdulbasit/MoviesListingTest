@@ -63,12 +63,12 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         viewModel.filterData(query)
-        return true
+        return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         viewModel.filterData(newText)
-        return true
+        return false
     }
 
 }
