@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">SWVLMobileChallenge</string>
-    <string name="genre">Genre</string>
+    <string name="genre">Genre:</string>
     <string name="movie_tittle">Movie Tittle</string>
-    <string name="year">Year</string>
-    <string name="cast">Cast</string>
-    <string name="images">Images</string>
+    <string name="year">Year:</string>
+    <string name="cast">Cast:</string>
+    <string name="images">Images:</string>
+    <string name="rating">Rating:</string>
 </resources>

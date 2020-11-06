@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.swvlmobilechallenge.databinding.MovieDetailsFragmentBinding
+import com.example.swvlmobilechallenge.ui.main.asDomainModel
 
 class MovieDetailsFragment : Fragment() {
 
@@ -15,7 +16,7 @@ class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: MovieDetailsFragmentBinding
     private val viewModel: MovieDetailsViewModel by lazy {
-        ViewModelProvider(this, MovieDetailsViewModel.Factory(args.movie)).get(
+        ViewModelProvider(this, MovieDetailsViewModel.Factory(args.movie.asDomainModel())).get(
             MovieDetailsViewModel::class.java
         )
     }
@@ -33,31 +34,10 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
-        observeLiveData()
-    }
-
-    private fun observeLiveData() {
-
-        viewModel.imagesList.observe(viewLifecycleOwner, {
-            (binding.rvImages.adapter as ImagesAdapter).submitList(it)
-        })
-
     }
 
     private fun setAdapters() {
-
-        val generaAdapter = StringListAdapter()
-        binding.rvGeneres.adapter = generaAdapter
-        generaAdapter.submitList(args.movie.genres)
-
-        val castAdapter = StringListAdapter()
-        binding.rvMovieCast.adapter = castAdapter
-        castAdapter.submitList(args.movie.cast)
-
         val adapter = ImagesAdapter()
         binding.rvImages.adapter = adapter
-
     }
-
-
 }

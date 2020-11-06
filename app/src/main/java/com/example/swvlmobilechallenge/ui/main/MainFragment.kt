@@ -6,8 +6,6 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.databinding.MainFragmentBinding
 
@@ -26,6 +24,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+
     }
 
     override fun onCreateView(
@@ -41,6 +40,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,14 +59,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
             navigateToPackageDetailsPage(it)
         }
 
-        val manager = GridLayoutManager(requireContext(), 2)
-        manager.spanSizeLookup = object : SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (adapter.isHeader(position)) 2 else 1
-            }
-        }
-
-        binding.rvMoviesList.layoutManager = manager
         binding.rvMoviesList.adapter = adapter
 
     }

@@ -32,3 +32,24 @@ data class MovieResponseModel(
         var isHeader: Boolean = false
     ) : Parcelable
 }
+
+fun MovieResponseModel.Movie.asDomainModel(): Movie {
+    return Movie(
+        cast = this.cast?.joinToString(),
+        genres = this.genres?.joinToString(),
+        rating = this.rating,
+        title = this.title,
+        year = this.year,
+
+        )
+}
+
+
+@Parcelize
+data class Movie(
+    var cast: String? = null,
+    var genres: String? = null,
+    var rating: Int? = null,
+    var title: String? = null,
+    var year: Int? = null,
+) : Parcelable

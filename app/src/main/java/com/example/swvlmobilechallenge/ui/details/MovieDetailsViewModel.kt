@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.swvlmobilechallenge.BaseViewModel
 import com.example.swvlmobilechallenge.apiservices.Status
-import com.example.swvlmobilechallenge.ui.main.MovieResponseModel
+import com.example.swvlmobilechallenge.ui.main.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class MovieDetailsViewModel(val movie: MovieResponseModel.Movie) : BaseViewModel() {
+class MovieDetailsViewModel(val movie: Movie) : BaseViewModel() {
 
     val imagesList = MutableLiveData<List<FlickrSearchResponseModel.Photos.Photo>>()
 
@@ -34,7 +34,7 @@ class MovieDetailsViewModel(val movie: MovieResponseModel.Movie) : BaseViewModel
     }
 
 
-    class Factory(val movie: MovieResponseModel.Movie) : ViewModelProvider.Factory {
+    class Factory(val movie: Movie) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

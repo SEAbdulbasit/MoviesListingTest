@@ -31,7 +31,8 @@ class MainViewModel : BaseViewModel() {
             coroutineScope.launch(Dispatchers.IO) {
 
                 val list = moviesList?.filter {
-                    it.title.toString().contains(date!!) || it.year.toString().contains(date)
+                    it.title.toString().contains(date!!, ignoreCase = true) || it.year.toString()
+                        .contains(date)
                 }
                     ?.groupBy { it.year }
 

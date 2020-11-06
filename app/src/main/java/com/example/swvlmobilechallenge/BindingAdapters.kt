@@ -10,6 +10,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.example.swvlmobilechallenge.ui.details.FlickrSearchResponseModel
+import com.example.swvlmobilechallenge.ui.details.ImagesAdapter
 import com.example.swvlmobilechallenge.ui.main.MovieResponseModel
 import com.example.swvlmobilechallenge.ui.main.MoviesAdapter
 import timber.log.Timber
@@ -31,7 +33,7 @@ fun subMovies(
 fun loadImage(
     imgView: ImageView,
     photoModel
-    : com.example.swvlmobilechallenge.ui.details.FlickrSearchResponseModel.Photos.Photo?
+    : FlickrSearchResponseModel.Photos.Photo?
 ) {
 
     val circularProgressDrawable = CircularProgressDrawable(imgView.context)
@@ -71,11 +73,19 @@ fun loadImage(
 
     Timber.d("Image URL $imageUrl")
 
-    // circularProgressDrawable.start()
+    circularProgressDrawable.start()
     Glide.with(imgView.context)
         .load(
             imageUrl
-        )
+        ).error(R.drawable.ic_image)
         .placeholder(circularProgressDrawable)
         .into(imgView)
+}
+
+@BindingAdapter("submitImagesList")
+fun submitImagesList(
+    view: RecyclerView,
+    imagesList: List<FlickrSearchResponseModel.Photos.Photo>?
+) {
+    (view.adapter as ImagesAdapter).submitList(imagesList)
 }
