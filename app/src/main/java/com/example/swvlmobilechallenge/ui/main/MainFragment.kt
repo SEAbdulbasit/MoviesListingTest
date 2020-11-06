@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.example.swvlmobilechallenge.R
@@ -23,7 +24,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
 
     }
 
@@ -40,7 +41,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
-        observeLiveData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,7 +55,9 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun setAdapter() {
 
-        val adapter = MoviesAdapter()
+        val adapter = MoviesAdapter {
+            navigateToPackageDetailsPage(it)
+        }
 
         val manager = GridLayoutManager(requireContext(), 2)
         manager.spanSizeLookup = object : SpanSizeLookup() {
@@ -67,13 +69,14 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.rvMoviesList.layoutManager = manager
         binding.rvMoviesList.adapter = adapter
 
-
     }
 
-    private fun observeLiveData() {
-        viewModel.moviesLiveList.observe(viewLifecycleOwner, {
-            (binding.rvMoviesList.adapter as MoviesAdapter).submitList(it)
-        })
+    private fun navigateToPackageDetailsPage(movie: MovieResponseModel.Movie) {
+        findNavController().navigate(
+            MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(
+                movie
+            )
+        )
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

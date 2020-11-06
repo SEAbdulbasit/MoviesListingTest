@@ -16,6 +16,7 @@ import com.example.swvlmobilechallenge.databinding.HolderMovieBinding
 
 
 class MoviesAdapter internal constructor(
+    private val callback: (MovieResponseModel.Movie) -> Unit
 ) : ListAdapter<MovieResponseModel.Movie, RecyclerView.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -48,6 +49,8 @@ class MoviesAdapter internal constructor(
 
         } else {
             (holder as MovieHolder).bind(getItem(position))
+            holder.itemView.setOnClickListener { callback.invoke(getItem(position)) }
+
         }
 
     }
@@ -62,16 +65,16 @@ class MoviesAdapter internal constructor(
 
     inner class MovieHolder internal constructor(private val binding: HolderMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(addressTag: MovieResponseModel.Movie) {
-            binding.model = addressTag
+        fun bind(movie: MovieResponseModel.Movie) {
+            binding.model = movie
             binding.executePendingBindings()
         }
     }
 
     inner class HeaderHolder internal constructor(private val binding: HolderHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(addressTag: MovieResponseModel.Movie) {
-            binding.model = addressTag
+        fun bind(movie: MovieResponseModel.Movie) {
+            binding.model = movie
             binding.executePendingBindings()
         }
     }

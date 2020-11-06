@@ -1,7 +1,9 @@
 package com.example.swvlmobilechallenge.ui.main
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
 
 //
@@ -9,11 +11,13 @@ import com.squareup.moshi.JsonClass
 //
 
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class MovieResponseModel(
     @Json(name = "movies")
     var movies: List<Movie>
-) {
+) : Parcelable {
     @JsonClass(generateAdapter = true)
+    @Parcelize
     data class Movie(
         @Json(name = "cast")
         var cast: List<String?>? = null,
@@ -26,5 +30,5 @@ data class MovieResponseModel(
         @Json(name = "year")
         var year: Int? = null,
         var isHeader: Boolean = false
-    )
+    ) : Parcelable
 }
