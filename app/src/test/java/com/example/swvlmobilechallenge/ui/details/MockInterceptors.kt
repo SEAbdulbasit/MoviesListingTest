@@ -17,7 +17,7 @@ class MockInterceptors : Interceptor {
         if (BuildConfig.DEBUG) {
             val uri = chain.request().url.toUri().toString()
             val responseString = when {
-                uri.endsWith("starred") -> getListOfReposBeingStarredJson
+                uri.contains("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=907d729c5f64ce745f9be6de4bdbeb14&format=json&nojsoncallback=1&text=") -> getListOfReposBeingStarredJson
                 else -> ""
             }
 

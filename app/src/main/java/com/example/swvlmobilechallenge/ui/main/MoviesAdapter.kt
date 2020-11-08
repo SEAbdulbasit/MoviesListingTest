@@ -15,6 +15,7 @@ import com.example.swvlmobilechallenge.databinding.HolderMovieBinding
 //
 
 
+//using diff utils for better optimization
 class MoviesAdapter internal constructor(
     private val callback: (MovieResponseModel.Movie) -> Unit
 ) : ListAdapter<MovieResponseModel.Movie, RecyclerView.ViewHolder>(DiffCallBack) {
@@ -37,7 +38,6 @@ class MoviesAdapter internal constructor(
                 parent,
                 false
             )
-
             return HeaderHolder(binding)
         }
     }
@@ -52,7 +52,6 @@ class MoviesAdapter internal constructor(
             holder.itemView.setOnClickListener { callback.invoke(getItem(position)) }
 
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {

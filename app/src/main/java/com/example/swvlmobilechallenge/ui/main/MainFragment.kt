@@ -54,9 +54,10 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
         return when (item.itemId) {
             R.id.action_move_to_top -> {
+
+                // scroll to top position when the move to top option is clicked
                 binding.rvMoviesList.smoothScrollToPosition(0)
                 true
             }
@@ -66,7 +67,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun setAdapter() {
-
         adapter = MoviesAdapter {
             navigateToPackageDetailsPage(it)
         }

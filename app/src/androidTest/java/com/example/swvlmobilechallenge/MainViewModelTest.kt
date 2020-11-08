@@ -2,7 +2,8 @@ package com.example.swvlmobilechallenge
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.swvlmobilechallenge.apiservices.UserRepository
+import com.example.swvlmobilechallenge.apiservices.MoviesRepository
+import com.example.swvlmobilechallenge.apiservices.createRetrofit
 import com.example.swvlmobilechallenge.ui.main.MainViewModel
 import junit.framework.TestCase
 import org.junit.Before
@@ -14,7 +15,7 @@ import org.junit.Test
 
 class MainViewModelTest : TestCase() {
     private val appContext: Context = InstrumentationRegistry.getInstrumentation().targetContext
-    private val userRepository = UserRepository()
+    private val userRepository = MoviesRepository(createRetrofit())
     private lateinit var mainViewMovie: MainViewModel
 
     @Before
@@ -22,12 +23,11 @@ class MainViewModelTest : TestCase() {
         super.setUp()
         mainViewMovie = MainViewModel(userRepository)
         mainViewMovie.getMoviesList()
-
     }
 
     @Test
     fun testGetMoviesLiveList_Success() {
-        val results = mainViewMovie.userRepository.getMoviesList(appContext)
+        val results = mainViewMovie.moviesRepository.getMoviesList(appContext)
         assertTrue(results?.movies?.isNotEmpty() ?: false)
     }
 

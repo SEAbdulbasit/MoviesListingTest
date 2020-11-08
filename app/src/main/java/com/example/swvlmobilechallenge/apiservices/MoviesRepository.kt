@@ -10,10 +10,11 @@ import com.squareup.moshi.JsonAdapter
 // Created by Abdul Basit on 11/6/2020.
 //
 
-open class UserRepository(private val retrofit: AppRetrofit) {
+open class MoviesRepository(private val retrofit: AppRetrofit) {
 
     private val responseHandler = ResponseHandler()
 
+    // to get the movies list from file
     fun getMoviesList(context: Context): MovieResponseModel? {
         val text = context.resources.openRawResource(R.raw.movies)
             .bufferedReader().use { it.readText() }
@@ -24,6 +25,7 @@ open class UserRepository(private val retrofit: AppRetrofit) {
     }
 
 
+    // to fetch images from flickr
     suspend fun getMovieImages(movieTittle: String): Resource<FlickrSearchResponseModel> {
 
         try {

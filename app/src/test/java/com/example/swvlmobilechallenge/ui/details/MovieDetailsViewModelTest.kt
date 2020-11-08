@@ -2,7 +2,7 @@ package com.example.swvlmobilechallenge.ui.details
 
 import com.example.swvlmobilechallenge.BASE_URL
 import com.example.swvlmobilechallenge.apiservices.AppRetrofit
-import com.example.swvlmobilechallenge.apiservices.UserRepository
+import com.example.swvlmobilechallenge.apiservices.MoviesRepository
 import com.example.swvlmobilechallenge.apiservices.moshi
 import com.example.swvlmobilechallenge.ui.main.Movie
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -53,7 +53,7 @@ class MovieDetailsViewModelTest {
     )
 
     private lateinit var movieDetailsViewModel: MovieDetailsViewModel
-    private val repositoryHelperClass = UserRepository(createRetrofit())
+    private val repositoryHelperClass = MoviesRepository(createRetrofit())
 
     @Before
     fun setUp() {
@@ -63,7 +63,7 @@ class MovieDetailsViewModelTest {
     @Test
     fun getMovieDetails_Success() {
         GlobalScope.launch(Dispatchers.IO) {
-            val response = movieDetailsViewModel.userRepository.getMovieImages(movieModel.title!!)
+            val response = movieDetailsViewModel.moviesRepository.getMovieImages(movieModel.title!!)
             assertEquals(response.data != null, true)
         }
     }

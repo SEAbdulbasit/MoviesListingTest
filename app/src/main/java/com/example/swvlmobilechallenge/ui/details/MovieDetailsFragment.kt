@@ -45,6 +45,7 @@ class MovieDetailsFragment : Fragment() {
         observeLiveData()
     }
 
+    //observing the live data
     private fun observeLiveData() {
         viewModel.errorMessage.observe(viewLifecycleOwner, {
             if (it != null) {

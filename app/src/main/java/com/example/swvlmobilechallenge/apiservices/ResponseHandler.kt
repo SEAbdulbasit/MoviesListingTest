@@ -9,7 +9,9 @@ import java.net.UnknownHostException
 // Created by Abdul Basit on 11/6/2020.
 //
 
-
+/*
+ * A common class to handle success or failure based on exception and response codes
+* */
 open class ResponseHandler {
     fun <T : Any> handleSuccess(data: T?, responseCode: Int): Resource<T> {
         return Resource.success(data, responseCode)

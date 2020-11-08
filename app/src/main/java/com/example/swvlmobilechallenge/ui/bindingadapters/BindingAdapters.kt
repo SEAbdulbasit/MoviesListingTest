@@ -22,6 +22,7 @@ import timber.log.Timber
 // Created by Abdul Basit on 11/6/2020.
 //
 
+//binding adapter for movies list submission
 @BindingAdapter("submitMovies")
 fun subMovies(
     view: RecyclerView,
@@ -31,6 +32,7 @@ fun subMovies(
 
 }
 
+// binding adapter for images submission
 @BindingAdapter("submitImagesList")
 fun submitImagesList(
     view: RecyclerView,
@@ -46,6 +48,7 @@ fun loadImage(
     : FlickrSearchResponseModel.Photos.Photo?
 ) {
 
+    // make the circular progress bar to be shown as a placeholder
     val circularProgressDrawable = CircularProgressDrawable(imgView.context)
     circularProgressDrawable.strokeWidth = 7f
     circularProgressDrawable.centerRadius = 40f
@@ -66,6 +69,7 @@ fun loadImage(
     }
 
 
+    // creating the image URL
     val imageUrl =
         "https://farm${
             photoModel

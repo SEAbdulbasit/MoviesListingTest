@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.swvlmobilechallenge.App
-import com.example.swvlmobilechallenge.apiservices.UserRepository
+import com.example.swvlmobilechallenge.apiservices.MoviesRepository
 import com.example.swvlmobilechallenge.baseclasses.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,14 +14,14 @@ import kotlinx.coroutines.withContext
 const val LAYOUT_TYPE_HEADER = 0
 const val LAYOUT_TYPE_ITEM = 1
 
-class MainViewModel(val userRepository: UserRepository) : BaseViewModel() {
+class MainViewModel(val moviesRepository: MoviesRepository) : BaseViewModel() {
 
     private var moviesList: List<MovieResponseModel.Movie>? = null
     val moviesLiveList = MutableLiveData<List<MovieResponseModel.Movie>>()
 
     fun getMoviesList() {
         coroutineScope.launch(Dispatchers.IO) {
-            moviesList = userRepository.getMoviesList(App.getInstance())?.movies
+            moviesList = moviesRepository.getMoviesList(App.getInstance())?.movies
             withContext(Dispatchers.Main) {
                 moviesLiveList.value = moviesList
             }
@@ -42,12 +42,17 @@ class MainViewModel(val userRepository: UserRepository) : BaseViewModel() {
     }
 
     fun filterDataOnSearch(searchName: String): MutableList<MovieResponseModel.Movie> {
+
+        //filtering and grouping the data based on movie tittle
         val list = moviesList?.filter {
             it.title.toString().contains(searchName, ignoreCase = true)
         }
             ?.groupBy { it.year }
 
         val resultedList = mutableListOf<MovieResponseModel.Movie>()
+
+        // as we have data in group form and we also need to show year tittle again each group so
+        // we will be adding header items along with searched items
         if (list != null) {
             for ((k, v) in list) {
                 resultedList.add(MovieResponseModel.Movie(isHeader = true, year = k))
@@ -59,11 +64,11 @@ class MainViewModel(val userRepository: UserRepository) : BaseViewModel() {
         return resultedList
     }
 
-    class Factory(private val userRepository: UserRepository) : ViewModelProvider.Factory {
+    class Factory(private val moviesRepository: MoviesRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(userRepository = userRepository) as T
+                return MainViewModel(moviesRepository = moviesRepository) as T
             }
             throw IllegalArgumentException("Unable to construct view model")
         }

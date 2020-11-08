@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit
 // Created by Abdul Basit on 11/6/2020.
 //
 
+//moshi for json parsing
 val moshi: Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -25,7 +26,6 @@ private fun makeHttpClient(): OkHttpClient {
     okBuilder.readTimeout(30, TimeUnit.SECONDS)
     okBuilder.addInterceptor(loggingInterceptor())
     okBuilder.addNetworkInterceptor(StethoInterceptor())
-
     return okBuilder.build()
 }
 
