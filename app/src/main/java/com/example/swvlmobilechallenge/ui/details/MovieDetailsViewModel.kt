@@ -3,6 +3,8 @@ package com.example.swvlmobilechallenge.ui.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.swvlmobilechallenge.App
+import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.apiservices.Status
 import com.example.swvlmobilechallenge.apiservices.UserRepository
 import com.example.swvlmobilechallenge.baseclasses.BaseViewModel
@@ -15,6 +17,7 @@ class MovieDetailsViewModel(val userRepository: UserRepository, val movie: Movie
     BaseViewModel() {
 
     val imagesList = MutableLiveData<List<FlickrSearchResponseModel.Photos.Photo>>()
+    val errorMessage = MutableLiveData<String>()
 
     init {
         getMovieImages(movie.title!!)
@@ -28,7 +31,14 @@ class MovieDetailsViewModel(val userRepository: UserRepository, val movie: Movie
                     Status.SUCCESS -> {
                         imagesList.value = result.data?.photos?.photo
                     }
+                    Status.NO_INTERNET_CONNECTION -> {
+                        errorMessage.value =
+                            App.getInstance().getString(R.string.no_internet_connection)
+                    }
                     else -> {
+                        errorMessage.value =
+                            App.getInstance().getString(R.string.something_went_wrong)
+
                     }
                 }
             }
