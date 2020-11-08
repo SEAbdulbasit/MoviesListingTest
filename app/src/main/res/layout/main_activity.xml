@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.swvlmobilechallenge.MainActivityViewModel" />
+            type="com.example.swvlmobilechallenge.ui.mainactivity.MainActivityViewModel" />
 
     </data>
 

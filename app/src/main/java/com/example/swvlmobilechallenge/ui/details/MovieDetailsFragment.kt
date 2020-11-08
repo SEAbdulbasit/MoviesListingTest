@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.example.swvlmobilechallenge.App
 import com.example.swvlmobilechallenge.databinding.MovieDetailsFragmentBinding
 import com.example.swvlmobilechallenge.ui.main.asDomainModel
 
@@ -16,7 +17,13 @@ class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: MovieDetailsFragmentBinding
     private val viewModel: MovieDetailsViewModel by lazy {
-        ViewModelProvider(this, MovieDetailsViewModel.Factory(args.movie.asDomainModel())).get(
+        ViewModelProvider(
+            this,
+            MovieDetailsViewModel.Factory(
+                App.getInstance().getUserRepository(),
+                args.movie.asDomainModel()
+            )
+        ).get(
             MovieDetailsViewModel::class.java
         )
     }

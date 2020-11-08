@@ -6,6 +6,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.swvlmobilechallenge.App
 import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.databinding.MainFragmentBinding
 
@@ -15,7 +16,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding: MainFragmentBinding
 
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this, MainViewModel.Factory()).get(
+        ViewModelProvider(this, MainViewModel.Factory(App.getInstance().getUserRepository())).get(
             MainViewModel::class.java
         )
     }

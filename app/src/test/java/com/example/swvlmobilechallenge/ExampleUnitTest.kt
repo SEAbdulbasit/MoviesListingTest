@@ -1,6 +1,7 @@
 package com.example.swvlmobilechallenge
 
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -9,6 +10,13 @@ import org.junit.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+
+    @Before
+    fun initializeUserRepository() {
+
+    }
+
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)

@@ -47,6 +47,6 @@ open class ResponseHandler {
     }
 
     fun <T : Any> handleException(statusCode: Int): Resource<T> {
-        return Resource.error("Exception occured", null, statusCode)
+        return Resource.error("Exception occurred", null, statusCode)
     }
 }

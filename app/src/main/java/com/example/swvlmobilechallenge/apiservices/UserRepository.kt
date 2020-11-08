@@ -1,6 +1,6 @@
 package com.example.swvlmobilechallenge.apiservices
 
-import com.example.swvlmobilechallenge.App
+import android.content.Context
 import com.example.swvlmobilechallenge.App.Companion.moshi
 import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.ui.details.FlickrSearchResponseModel
@@ -17,8 +17,8 @@ class UserRepository {
     private val retrofit = createRetrofit()
     private val responseHandler = ResponseHandler()
 
-    fun getMoviesList(): MovieResponseModel? {
-        val text = App.getInstance().applicationContext.resources.openRawResource(R.raw.movies)
+    fun getMoviesList(context: Context): MovieResponseModel? {
+        val text = context.resources.openRawResource(R.raw.movies)
             .bufferedReader().use { it.readText() }
 
         val jsonAdapter: JsonAdapter<MovieResponseModel> =
@@ -30,7 +30,7 @@ class UserRepository {
     suspend fun getMovieImages(movieTittle: String): Resource<FlickrSearchResponseModel> {
 
         try {
-            val apiResults = retrofit.getMovieImages(
+            val apiResults = retrofit.getMovieImagesAsync(
                 url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=907d729c5f64ce745f9be6de4bdbeb14&format=json&nojsoncallback=1&text=$movieTittle&page=1&per_page=10"
             ).await()
 

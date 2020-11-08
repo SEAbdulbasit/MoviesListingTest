@@ -1,7 +1,8 @@
-package com.example.swvlmobilechallenge
+package com.example.swvlmobilechallenge.ui.mainactivity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.swvlmobilechallenge.baseclasses.BaseViewModel
 
 //
 // Created by Abdul Basit on 11/4/2020.

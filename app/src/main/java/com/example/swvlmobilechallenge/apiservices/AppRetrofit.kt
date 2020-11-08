@@ -13,7 +13,7 @@ import retrofit2.http.Url
 interface AppRetrofit {
 
     @GET
-    fun getMovieImages(
+    fun getMovieImagesAsync(
         @Url url: String
     ): Deferred<Response<FlickrSearchResponseModel>>
 

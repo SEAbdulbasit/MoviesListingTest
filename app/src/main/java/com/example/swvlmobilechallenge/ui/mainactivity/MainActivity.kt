@@ -1,4 +1,4 @@
-package com.example.swvlmobilechallenge
+package com.example.swvlmobilechallenge.ui.mainactivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         supportActionBar?.elevation = 0f
-
 
     }
 
