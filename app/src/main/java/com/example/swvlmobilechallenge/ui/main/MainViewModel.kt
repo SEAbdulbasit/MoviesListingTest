@@ -19,12 +19,8 @@ class MainViewModel(val userRepository: UserRepository) : BaseViewModel() {
     private var moviesList: List<MovieResponseModel.Movie>? = null
     val moviesLiveList = MutableLiveData<List<MovieResponseModel.Movie>>()
 
-    init {
-        getMoviesList()
-    }
-
     fun getMoviesList() {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             moviesList = userRepository.getMoviesList(App.getInstance())?.movies
             withContext(Dispatchers.Main) {
                 moviesLiveList.value = moviesList
@@ -47,8 +43,7 @@ class MainViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
     fun filterDataOnSearch(searchName: String): MutableList<MovieResponseModel.Movie> {
         val list = moviesList?.filter {
-            it.title.toString().contains(searchName!!, ignoreCase = true) || it.year.toString()
-                .contains(searchName)
+            it.title.toString().contains(searchName, ignoreCase = true)
         }
             ?.groupBy { it.year }
 

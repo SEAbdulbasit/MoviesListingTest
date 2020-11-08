@@ -35,13 +35,7 @@ class App : Application() {
             }
             return instance!!
         }
-
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
     }
-
 
     private var userRepository: UserRepository? = null
     fun getUserRepository(): UserRepository {
@@ -51,6 +45,4 @@ class App : Application() {
         }
         return userRepository!!
     }
-
-
 }

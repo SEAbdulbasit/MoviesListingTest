@@ -9,5 +9,4 @@ import kotlinx.coroutines.Job
 open class BaseViewModel : ViewModel() {
     private val viewModelJob = Job()
     val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
-    var context = App.getInstance()
 }

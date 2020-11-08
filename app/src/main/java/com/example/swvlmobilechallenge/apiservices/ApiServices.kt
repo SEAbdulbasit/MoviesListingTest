@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 // Created by Abdul Basit on 11/6/2020.
 //
 
-val moshi = Moshi.Builder()
+val moshi: Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 

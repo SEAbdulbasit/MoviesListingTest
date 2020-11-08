@@ -59,10 +59,6 @@ class MoviesAdapter internal constructor(
         return if (getItem(position).isHeader) return LAYOUT_TYPE_HEADER else LAYOUT_TYPE_ITEM
     }
 
-    fun isHeader(position: Int): Boolean {
-        return (getItem(position).isHeader)
-    }
-
     inner class MovieHolder internal constructor(private val binding: HolderMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: MovieResponseModel.Movie) {
@@ -84,14 +80,14 @@ class MoviesAdapter internal constructor(
             oldItem: MovieResponseModel.Movie,
             newItem: MovieResponseModel.Movie
         ): Boolean {
-            return false//oldItem == newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(
             oldItem: MovieResponseModel.Movie,
             newItem: MovieResponseModel.Movie
         ): Boolean {
-            return false//oldItem.title == newItem.title
+            return oldItem.title == newItem.title
         }
     }
 }

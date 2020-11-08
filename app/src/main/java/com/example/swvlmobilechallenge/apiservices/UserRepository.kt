@@ -1,7 +1,6 @@
 package com.example.swvlmobilechallenge.apiservices
 
 import android.content.Context
-import com.example.swvlmobilechallenge.App.Companion.moshi
 import com.example.swvlmobilechallenge.R
 import com.example.swvlmobilechallenge.ui.details.FlickrSearchResponseModel
 import com.example.swvlmobilechallenge.ui.main.MovieResponseModel

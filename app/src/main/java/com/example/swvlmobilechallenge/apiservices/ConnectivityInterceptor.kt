@@ -37,7 +37,12 @@ open class ConnectivityInterceptor : Interceptor {
         fun isInternetAvailable(context: Context): Boolean {
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkCapabilities = connectivityManager.activeNetwork ?: return false
+            val networkCapabilities =
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    connectivityManager.activeNetwork ?: return false
+                } else {
+                    return false
+                }
             val actNw =
                 connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
             return when {

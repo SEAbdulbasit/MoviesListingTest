@@ -8,4 +8,6 @@
     <string name="rating">Rating:</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="move_to_top">move to top</string>
+    <string name="search">Search</string>
 </resources>

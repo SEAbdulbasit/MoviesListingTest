@@ -14,6 +14,7 @@ import com.example.swvlmobilechallenge.databinding.MainFragmentBinding
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: MainFragmentBinding
+    lateinit var adapter: MoviesAdapter
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModel.Factory(App.getInstance().getUserRepository())).get(
@@ -24,8 +25,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-
     }
 
     override fun onCreateView(
@@ -54,14 +53,25 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView.setOnQueryTextListener(this)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_move_to_top -> {
+                binding.rvMoviesList.smoothScrollToPosition(0)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun setAdapter() {
 
-        val adapter = MoviesAdapter {
+        adapter = MoviesAdapter {
             navigateToPackageDetailsPage(it)
         }
 
         binding.rvMoviesList.adapter = adapter
-
     }
 
     private fun navigateToPackageDetailsPage(movie: MovieResponseModel.Movie) {
@@ -70,6 +80,11 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 movie
             )
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMoviesList()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.swvlmobilechallenge
 
 import android.graphics.BlendMode
@@ -27,6 +29,14 @@ fun subMovies(
 ) {
     (view.adapter as MoviesAdapter).submitList(list)
 
+}
+
+@BindingAdapter("submitImagesList")
+fun submitImagesList(
+    view: RecyclerView,
+    imagesList: List<FlickrSearchResponseModel.Photos.Photo>?
+) {
+    (view.adapter as ImagesAdapter).submitList(imagesList)
 }
 
 @BindingAdapter("loadImageFromURL")
@@ -80,12 +90,4 @@ fun loadImage(
         ).error(R.drawable.ic_image)
         .placeholder(circularProgressDrawable)
         .into(imgView)
-}
-
-@BindingAdapter("submitImagesList")
-fun submitImagesList(
-    view: RecyclerView,
-    imagesList: List<FlickrSearchResponseModel.Photos.Photo>?
-) {
-    (view.adapter as ImagesAdapter).submitList(imagesList)
 }
