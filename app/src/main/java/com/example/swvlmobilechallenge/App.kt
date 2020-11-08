@@ -2,6 +2,7 @@ package com.example.swvlmobilechallenge
 
 import android.app.Application
 import com.example.swvlmobilechallenge.apiservices.UserRepository
+import com.example.swvlmobilechallenge.apiservices.createRetrofit
 import com.facebook.stetho.Stetho
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -46,7 +47,7 @@ class App : Application() {
     fun getUserRepository(): UserRepository {
         synchronized(App::class.java) {
             if (userRepository == null)
-                userRepository = UserRepository()
+                userRepository = UserRepository(createRetrofit())
         }
         return userRepository!!
     }

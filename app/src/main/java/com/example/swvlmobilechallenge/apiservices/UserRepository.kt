@@ -11,10 +11,8 @@ import com.squareup.moshi.JsonAdapter
 // Created by Abdul Basit on 11/6/2020.
 //
 
-class UserRepository {
+open class UserRepository(private val retrofit: AppRetrofit) {
 
-    //getting the app retrofit instance
-    private val retrofit = createRetrofit()
     private val responseHandler = ResponseHandler()
 
     fun getMoviesList(context: Context): MovieResponseModel? {

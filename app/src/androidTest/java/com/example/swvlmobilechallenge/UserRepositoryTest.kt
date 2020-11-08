@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.swvlmobilechallenge.apiservices.UserRepository
+import com.example.swvlmobilechallenge.apiservices.createRetrofit
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
@@ -23,7 +24,7 @@ class UserRepositoryTest {
 
     @Before
     fun initialize() {
-        userRepository = UserRepository()
+        userRepository = UserRepository(createRetrofit())
     }
 
     @Test

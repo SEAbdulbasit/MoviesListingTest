@@ -10,7 +10,6 @@ import com.example.swvlmobilechallenge.ui.main.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class MovieDetailsViewModel(val userRepository: UserRepository, val movie: Movie) :
     BaseViewModel() {
@@ -18,8 +17,12 @@ class MovieDetailsViewModel(val userRepository: UserRepository, val movie: Movie
     val imagesList = MutableLiveData<List<FlickrSearchResponseModel.Photos.Photo>>()
 
     init {
+        getMovieImages(movie.title!!)
+    }
+
+    private fun getMovieImages(tittle: String) {
         coroutineScope.launch {
-            val result = userRepository.getMovieImages(movieTittle = movie.title!!)
+            val result = userRepository.getMovieImages(movieTittle = tittle)
             withContext(Dispatchers.Main) {
                 when (result.status) {
                     Status.SUCCESS -> {

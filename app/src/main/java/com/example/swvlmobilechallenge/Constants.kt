@@ -5,4 +5,4 @@ package com.example.swvlmobilechallenge
 //
 
 const val NO_INTERNET_CONNECTION = "12163"
-const val BASE_URL = "https://12163"
+const val BASE_URL = "https://api.flickr.com/"
