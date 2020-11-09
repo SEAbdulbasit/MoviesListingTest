@@ -51,12 +51,8 @@ class NoSearchResultsTest {
         )
         appCompatImageView.perform(click())
 
-        Thread.sleep(3000)
-
         val searchAutoComplete = onView(withId(R.id.action_search))
         searchAutoComplete.perform(typeText("ameljssj"), closeSoftKeyboard())
-
-        Thread.sleep(2000)
 
         onView(withId(R.id.noSearchResultsFound)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
     }
