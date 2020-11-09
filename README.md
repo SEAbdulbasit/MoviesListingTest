@@ -1,7 +1,7 @@
-<h1 align="center">MovieListingTest</h1>
+<h1 align="center">Movie Listing</h1>
 
 <p align="center">  
-This is a small demo project for loading movies list from a file and fetching images from flickr based on movie tittle.
+This is a small demo project for loading movies list from a file and fetching images from Flickr based on movie tittle.
 </p>
 </br>
 
