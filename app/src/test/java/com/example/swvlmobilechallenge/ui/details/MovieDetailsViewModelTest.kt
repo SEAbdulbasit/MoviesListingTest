@@ -64,7 +64,7 @@ class MovieDetailsViewModelTest {
     fun getMovieDetails_Success() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = movieDetailsViewModel.moviesRepository.getMovieImages(movieModel.title!!)
-            assertEquals(response.data != null, true)
+            assertEquals(response.data?.photos != null, true)
         }
     }
 
