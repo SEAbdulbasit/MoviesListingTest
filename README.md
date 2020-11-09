@@ -1,7 +1,7 @@
 <h1 align="center">Movie Listing</h1>
 
 <p align="center">  
-This is a small demo project for loading movies list from a file and fetching images from Flickr based on movie tittle. Android Studio 4.1 version is required.
+This is a small demo project for loading movies list from a file and fetching images from Flickr based on movie tittle.
 </p>
 </br>
 
