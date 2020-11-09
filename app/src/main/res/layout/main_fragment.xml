@@ -41,6 +41,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/noSearchResultsFound"
             android:src="@drawable/ic_nothing_found"
             android:visibility="@{viewModel.moviesLiveList.size()==0?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"

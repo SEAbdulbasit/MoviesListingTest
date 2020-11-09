@@ -49,7 +49,6 @@ class MoviesAdapter internal constructor(
 
         } else {
             (holder as MovieHolder).bind(getItem(position))
-            holder.itemView.setOnClickListener { callback.invoke(getItem(position)) }
 
         }
     }
@@ -62,6 +61,7 @@ class MoviesAdapter internal constructor(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: MovieResponseModel.Movie) {
             binding.model = movie
+            binding.cardView.setOnClickListener { callback.invoke(movie) }
             binding.executePendingBindings()
         }
     }
